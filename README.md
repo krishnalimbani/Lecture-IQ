@@ -1,17 +1,20 @@
-# LectureIQ - Lecture to Notes & Quiz Generator
+# 🎓 LectureIQ - Lecture to Notes & Quiz Generator
 
-LectureIQ is a web-based study assistant that converts lecture content into structured study material.
+LectureIQ is a web-based smart study assistant that converts lecture
+content into structured and interactive study material.
 
-It can generate:
+It helps students transform lengthy lecture content into:
+
 - 📝 Smart Notes
-- 📌 Summary
+- 📌 Summaries
 - 🎯 Key Points
 - 🧠 Quiz Questions
 - 🃏 Interactive Flashcards
 - 🔑 Keywords
 - 📚 Study History
 
-The application also supports uploading lecture files such as TXT, PDF, and DOCX files and extracting their content automatically.
+LectureIQ supports manual lecture input as well as TXT, PDF, and DOCX
+file uploads.
 
 ---
 
@@ -21,7 +24,7 @@ The application also supports uploading lecture files such as TXT, PDF, and DOCX
 
 Enter lecture content manually or upload a lecture file.
 
-LectureIQ processes the content and generates:
+LectureIQ generates:
 
 - Lecture title
 - Summary
@@ -29,63 +32,50 @@ LectureIQ processes the content and generates:
 - Key points
 - Important keywords
 
----
-
 ### 📂 File Upload
 
-LectureIQ supports:
+Supported formats:
 
 - `.txt`
 - `.pdf`
 - `.docx`
 
-Uploaded lecture content is extracted and processed automatically.
-
-The application also performs text cleanup to improve readability when extracting content from files.
-
-> Note: Complex multi-column PDFs, scanned PDFs, tables, and image-only documents may not always extract perfectly because they require advanced layout detection or OCR.
-
----
+The application extracts text from uploaded documents and processes it
+before generating study material.
 
 ### 📖 Summary
 
-The Summary section provides a concise version of the lecture content.
+Generates a concise extractive summary of the lecture.
 
-It is useful for:
+Useful for:
 
 - Quick revision
 - Exam preparation
-- Understanding the main concepts
-- Reviewing long lectures
-
-You can also copy the generated summary.
-
----
+- Understanding important concepts
+- Reviewing lengthy lectures
 
 ### 📌 Smart Notes
 
-LectureIQ creates structured notes containing:
+Generated notes contain:
 
 - Overview
-- Key Points
+- Key points
 - Keywords
 - Summary
 
-You can:
+Users can:
 
-- Copy the notes
-- Download the notes as a `.txt` file
-
----
+- Copy notes
+- Download notes as a `.txt` file
 
 ### 🧠 Quiz Generator
 
-The application automatically creates multiple-choice questions from the lecture content.
+LectureIQ automatically creates multiple-choice questions.
 
-Quiz features include:
+Features:
 
 - Multiple-choice questions
-- Option selection
+- Answer selection
 - Score calculation
 - Progress tracking
 - Quiz submission
@@ -93,111 +83,251 @@ Quiz features include:
 - Best score tracking
 - Sample question option
 
-The quiz interface is designed to avoid unnecessary flickering when selecting an answer.
-
----
-
 ### 🃏 Interactive Flashcards
 
-LectureIQ converts important lecture concepts into interactive flashcards.
+Important concepts are converted into interactive flashcards.
 
-Features include:
+Features:
 
-- Flip-card animation
+- Flip animation
 - Previous/Next navigation
 - Shuffle cards
 - Reset cards
 - Long-question support
-- Scrollable card content
-
-The flashcard animation is designed so that only the card itself flips instead of the surrounding page content.
-
----
+- Scrollable content
 
 ### 📚 History
 
-LectureIQ keeps track of generated study packs in the browser.
+The History section stores previously generated study material locally
+in the browser.
 
-The History section allows you to:
+Users can:
 
 - View previous generations
 - Load previous study content
-- Delete individual history entries
+- Delete history entries
 - Clear history
 
----
+### 🌙 Theme Support
 
-### 🌙 Dark / Light Theme
-
-LectureIQ includes a theme toggle for switching between different visual modes.
-
-The selected theme is stored locally in the browser.
-
----
+LectureIQ includes a theme toggle for a better user experience.
 
 ### 📊 Dashboard
 
-The dashboard provides quick statistics such as:
+The dashboard displays:
 
 - Notes generated
 - Quiz attempts
 - Best quiz score
 - Number of flashcards
 
----
-
 ### ✨ Interactive UI
 
-The application includes:
+The interface includes:
 
-- Animated interface
-- Animated cards
-- Smooth transitions
+- Smooth animations
 - Flashcard flip animation
-- Toast notifications
 - Loading indicators
+- Toast notifications
 - Scroll reveal animations
 - Responsive layout
 - Interactive navigation
 
 ---
 
-## 🛠️ Technologies Used
+# 🛠️ Technology Stack
 
-### Frontend
+## Frontend
 
 - HTML5
 - CSS3
 - JavaScript
-- CSS animations
-- DOM manipulation
-- Local Storage
+- CSS Animations
+- Browser Local Storage
 
-### Backend
+## Backend
 
-- Python
+- Python 3
 - Flask
 
-### File Processing
+## Document Processing
 
 - PyMuPDF
 - PyPDF2
 - python-docx
 
+## Development Tools
+
+- Visual Studio Code
+- Git
+- GitHub
+
 ---
 
-## 📁 Project Structure
+# 🧠 Models and Algorithms Used
+
+LectureIQ currently does not depend on an external machine-learning
+model or large-language model API.
+
+Instead, it uses lightweight NLP-inspired text-processing techniques
+implemented in Python.
+
+## 1. Text Preprocessing
+
+Uploaded or manually entered lecture content is cleaned and normalized.
+
+Operations include:
+
+- Removing unnecessary whitespace
+- Normalizing line breaks
+- Handling soft hyphens
+- Reconnecting words split across PDF lines
+- Organizing paragraphs and sentences
+
+## 2. Sentence Segmentation
+
+Lecture content is divided into individual sentences using punctuation
+and text-processing rules.
+
+## 3. Keyword Extraction
+
+Important words are identified using word-frequency analysis while
+filtering common stop words.
+
+The process includes:
+
+1. Tokenizing the text
+2. Normalizing words
+3. Removing common stop words
+4. Counting word frequency
+5. Selecting important keywords
+
+## 4. Extractive Summary Generation
+
+The summary is generated using sentence scoring.
+
+Sentences are scored using factors such as:
+
+- Important keyword occurrence
+- Sentence relevance
+- Position within the lecture
+- Distribution across different sections
+
+High-scoring sentences are selected and returned in their original
+document order.
+
+## 5. Key Point Extraction
+
+Important sentences are selected from different sections of the lecture
+to provide better coverage of the overall content.
+
+## 6. Quiz Generation
+
+Multiple-choice questions are generated from important lecture sentences
+and keywords.
+
+Each quiz question contains:
+
+- Question
+- Correct answer
+- Distractor options
+- Score calculation
+
+## 7. Flashcard Generation
+
+Important concepts are converted into question-and-answer flashcards.
+
+Users can:
+
+- Flip cards
+- Navigate between cards
+- Shuffle cards
+- Reset cards
+
+---
+
+# 📚 Project Modules
+
+## Module 1 - Input Management
+
+Accepts lecture content through:
+
+- Text input
+- TXT files
+- PDF files
+- DOCX files
+
+## Module 2 - Text Extraction
+
+Extracts readable text from uploaded documents.
+
+## Module 3 - Text Processing
+
+Cleans, normalizes, and organizes extracted content.
+
+## Module 4 - Summary Generation
+
+Produces a concise extractive summary.
+
+## Module 5 - Notes Generation
+
+Creates structured notes containing:
+
+- Overview
+- Key points
+- Keywords
+- Summary
+
+## Module 6 - Quiz Generation
+
+Creates multiple-choice questions and calculates the user's score.
+
+## Module 7 - Flashcards
+
+Creates interactive question-and-answer flashcards.
+
+## Module 8 - History
+
+Stores previously generated study material locally in the browser.
+
+## Module 9 - User Interface
+
+Provides:
+
+- Responsive design
+- Animations
+- Theme switching
+- Toast notifications
+- Interactive navigation
+- Loading states
+
+---
+
+# 🔄 System Workflow
 
 ```text
-LectureIQ/
-│
-├── app.py
-├── requirements.txt
-├── README.md
-│
-├── templates/
-│   └── index.html
-│
-└── static/
-    ├── style.css
-    └── script.js
+              Lecture Content
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+      Enter Text         Upload File
+          │                   │
+          └─────────┬─────────┘
+                    ↓
+             Text Extraction
+                    ↓
+             Text Processing
+                    ↓
+           Sentence Analysis
+                    ↓
+        ┌───────────┼───────────┐
+        ↓           ↓           ↓
+     Summary      Notes      Keywords
+        │           │
+        └───────────┼───────────┘
+                    ↓
+             Quiz Generation
+                    ↓
+           Flashcard Generation
+                    ↓
+            Interactive Dashboard
