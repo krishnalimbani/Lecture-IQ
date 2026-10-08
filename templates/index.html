@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        LectureIQ - Lecture to Notes & Quiz
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="background-effects">
+
+    <div class="orb orb-one"></div>
+
+    <div class="orb orb-two"></div>
+
+    <div class="orb orb-three"></div>
+
+    <div class="orb orb-four"></div>
+
+</div>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            L
+        </div>
+
+        <div>
+
+            <h2>
+                LectureIQ
+            </h2>
+
+            <span>
+                Smart Study Assistant
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="navigation">
+
+        <button
+            class="nav-item active"
+            data-target="dashboard"
+        >
+            <span>⌂</span>
+            Dashboard
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-target="summary-section"
+        >
+            <span>✦</span>
+            Summary
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-target="notes-section"
+        >
+            <span>📝</span>
+            Notes
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-target="quiz-section"
+        >
+            <span>✓</span>
+            Quiz
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-target="flashcards-section"
+        >
+            <span>◆</span>
+            Flashcards
+        </button>
+
+
+        <button
+            class="nav-item"
+            data-target="history-section"
+        >
+            <span>◷</span>
+            History
+        </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <button
+            id="themeToggle"
+            class="theme-button"
+            type="button"
+        >
+
+            <span id="themeIcon">
+                ☾
+            </span>
+
+            <span>
+                Theme
+            </span>
+
+        </button>
+
+
+        <div class="sidebar-footer">
+            LectureIQ • Study smarter
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <span class="topbar-label">
+                AI STUDY WORKSPACE
+            </span>
+
+            <h1>
+                Turn lectures into knowledge.
+            </h1>
+
+        </div>
+
+
+        <div class="topbar-status">
+
+            <span class="status-dot"></span>
+
+            Ready
+
+        </div>
+
+    </header>
+
+
+    <!-- DASHBOARD -->
+
+    <section
+        id="dashboard"
+        class="page-section hero-section reveal"
+    >
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                ✨ Intelligent Learning Workspace
+            </div>
+
+
+            <h2>
+                Learn faster.
+                <span>
+                    Remember more.
+                </span>
+            </h2>
+
+
+            <p>
+                Transform lecture content into concise notes,
+                summaries, quizzes and interactive flashcards.
+            </p>
+
+        </div>
+
+
+        <!-- INPUT -->
+
+        <div
+            class="input-card glass-card animated-card"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        LECTURE INPUT
+                    </span>
+
+                    <h3>
+                        Add your lecture
+                    </h3>
+
+                </div>
+
+
+                <button
+                    id="sampleLectureBtn"
+                    class="secondary-button"
+                    type="button"
+                >
+                    ✨ Use Sample Lecture
+                </button>
+
+            </div>
+
+
+            <textarea
+                id="lectureInput"
+                placeholder="Paste your lecture notes, classroom transcript, study material or any topic here..."
+            ></textarea>
+
+
+            <div
+                id="dropZone"
+                class="drop-zone"
+            >
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Drop a file here
+                    </strong>
+
+                    <p>
+                        or click to upload TXT, PDF, MD or DOCX
+                    </p>
+
+                </div>
+
+
+                <input
+                    id="fileInput"
+                    type="file"
+                    accept=".txt,.md,.pdf,.docx"
+                    hidden
+                >
+
+            </div>
+
+
+            <div
+                id="fileInfo"
+                class="file-info hidden"
+            >
+
+                <span>
+                    📄
+                </span>
+
+                <span id="fileName"></span>
+
+                <button
+                    id="removeFile"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="input-actions">
+
+                <button
+                    id="clearInput"
+                    class="ghost-button"
+                    type="button"
+                >
+                    Clear
+                </button>
+
+
+                <button
+                    id="generateBtn"
+                    class="primary-button generate-button"
+                    type="button"
+                >
+
+                    <span id="generateText">
+                        Generate Study Pack
+                    </span>
+
+                    <span
+                        id="generateSpinner"
+                        class="spinner hidden"
+                    ></span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card animated-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <strong id="notesCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Notes generated
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card animated-card">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong id="quizCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Quiz attempts
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card animated-card">
+
+                <div class="stat-icon">
+                    ★
+                </div>
+
+                <div>
+
+                    <strong id="bestScore">
+                        —
+                    </strong>
+
+                    <span>
+                        Best score
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card animated-card">
+
+                <div class="stat-icon">
+                    ◆
+                </div>
+
+                <div>
+
+                    <strong id="flashcardCount">
+                        0
+                    </strong>
+
+                    <span>
+                        Flashcards
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUMMARY -->
+
+    <section
+        id="summary-section"
+        class="page-section reveal"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    AT A GLANCE
+                </span>
+
+                <h3>
+                    Quick Summary
+                </h3>
+
+            </div>
+
+
+            <button
+                id="copySummary"
+                class="small-button"
+                type="button"
+            >
+                Copy
+            </button>
+
+        </div>
+
+
+        <div
+            class="summary-card animated-card"
+        >
+
+            <div class="summary-symbol">
+                ✦
+            </div>
+
+            <p id="summaryText">
+                Generate your study pack to see a concise summary here.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- NOTES -->
+
+    <section
+        id="notes-section"
+        class="page-section reveal"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    SMART NOTES
+                </span>
+
+                <h3>
+                    Lecture Notes
+                </h3>
+
+            </div>
+
+
+            <div class="section-actions">
+
+                <button
+                    id="copyNotes"
+                    class="small-button"
+                    type="button"
+                >
+                    Copy Notes
+                </button>
+
+
+                <button
+                    id="downloadNotes"
+                    class="small-button"
+                    type="button"
+                >
+                    ↓ Download Notes
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="notes-grid">
+
+            <div
+                class="notes-main glass-card animated-card"
+            >
+
+                <div class="notes-title-row">
+
+                    <h4 id="notesTitle">
+                        Your generated notes
+                    </h4>
+
+                </div>
+
+
+                <div
+                    id="overviewText"
+                    class="overview-box"
+                >
+                    Your notes will appear here.
+                </div>
+
+
+                <h4 class="subheading">
+                    Key Points
+                </h4>
+
+
+                <div
+                    id="keyPoints"
+                    class="key-points"
+                >
+
+                    <div class="empty-state">
+                        Generate a study pack first.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="keywords-card glass-card animated-card"
+            >
+
+                <h4>
+                    Key Terms
+                </h4>
+
+
+                <div
+                    id="keywords"
+                    class="keyword-list"
+                >
+
+                    <span class="empty-keyword">
+                        No keywords yet
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ -->
+
+    <section
+        id="quiz-section"
+        class="page-section reveal"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    TEST YOURSELF
+                </span>
+
+                <h3>
+                    Interactive Quiz
+                </h3>
+
+            </div>
+
+
+            <div class="section-actions">
+
+                <button
+                    id="sampleQuestionBtn"
+                    class="secondary-button"
+                    type="button"
+                >
+                    ✨ Sample Question
+                </button>
+
+
+                <button
+                    id="resetQuiz"
+                    class="small-button"
+                    type="button"
+                >
+                    Reset Quiz
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="quizContainer"
+            class="quiz-container"
+        >
+
+            <div class="empty-state glass-card">
+                Generate your study pack to start the quiz.
+            </div>
+
+        </div>
+
+
+        <div
+            id="quizControls"
+            class="quiz-controls hidden"
+        >
+
+            <span id="quizProgress">
+                Question 1 of 1
+            </span>
+
+
+            <button
+                id="submitQuiz"
+                class="primary-button"
+                type="button"
+            >
+                Submit Quiz
+            </button>
+
+        </div>
+
+
+        <div
+            id="quizResult"
+            class="quiz-result hidden"
+        ></div>
+
+    </section>
+
+
+    <!-- FLASHCARDS -->
+
+    <section
+        id="flashcards-section"
+        class="page-section reveal"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    ACTIVE RECALL
+                </span>
+
+                <h3>
+                    Flashcards
+                </h3>
+
+            </div>
+
+
+            <div class="flashcard-actions">
+
+                <button
+                    id="shuffleCards"
+                    class="small-button"
+                    type="button"
+                >
+                    ⤨ Shuffle
+                </button>
+
+
+                <button
+                    id="resetCards"
+                    class="small-button"
+                    type="button"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="flashcardArea"
+            class="flashcard-area"
+        >
+
+            <div class="empty-state glass-card">
+                Generate your study pack to create flashcards.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section
+        id="history-section"
+        class="page-section reveal"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    YOUR WORKSPACE
+                </span>
+
+                <h3>
+                    History
+                </h3>
+
+            </div>
+
+
+            <button
+                id="clearHistory"
+                class="small-button danger-button"
+                type="button"
+            >
+                Clear History
+            </button>
+
+        </div>
+
+
+        <div
+            id="historyList"
+            class="history-list"
+        >
+
+            <div class="empty-state glass-card">
+                No study packs generated yet.
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- SAMPLE QUESTION MODAL -->
+
+<div
+    id="sampleModal"
+    class="modal hidden"
+>
+
+    <div class="modal-backdrop"></div>
+
+
+    <div class="modal-card">
+
+        <button
+            id="closeModal"
+            class="modal-close"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <span class="eyebrow">
+            SAMPLE QUESTION
+        </span>
+
+
+        <h3>
+            Which option best describes the purpose of an LMS?
+        </h3>
+
+
+        <div class="sample-options">
+
+            <button type="button">
+                A. Manage, deliver and track educational content
+            </button>
+
+            <button type="button">
+                B. Replace all teachers
+            </button>
+
+            <button type="button">
+                C. Store only student photographs
+            </button>
+
+            <button type="button">
+                D. Provide internet connectivity
+            </button>
+
+        </div>
+
+
+        <div class="sample-answer">
+
+            <strong>
+                Answer:
+            </strong>
+
+            A. Manage, deliver and track educational content.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast"
+>
+
+    <span id="toastMessage"></span>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+</html>
